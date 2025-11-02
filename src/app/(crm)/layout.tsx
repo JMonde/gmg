@@ -25,8 +25,8 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         {children}
       </main>
 
-      {/* Side Pane */}
-      <aside className="mt-6 mr-6 mb-9 space-y-4">
+      {/* Side Pane - Will be hidden via CSS on menu-wizard page */}
+      <aside className="mt-6 mr-6 mb-9 space-y-4 reports-help-section">
         <Reports />
         <HelpMaterials />
       </aside>

@@ -178,4 +178,24 @@ body {
   .input-field {
     @apply text-brand-gray-600 w-full px-3 py-2 text-sm font-medium focus:outline-none;
   }
+
+  /* Hide the right sidebar when menu wizard page is active */
+  .app-shell:has(.menu-wizard-page) .reports-help-section {
+    display: none;
+  }
+  
+  /* Adjust grid template to reclaim the hidden sidebar space */
+  .app-shell:has(.menu-wizard-page) {
+    grid-template-columns: var(--left-menu-w) 1fr 0px;
+  }
+  
+  /* Hide the right sidebar when calendar page is active */
+  .app-shell:has(.calendar-page) .reports-help-section {
+    display: none;
+  }
+  
+  /* Adjust grid template to reclaim the hidden sidebar space */
+  .app-shell:has(.calendar-page) {
+    grid-template-columns: var(--left-menu-w) 1fr 0px;
+  }
 }

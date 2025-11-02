@@ -35,6 +35,21 @@ export async function apiServerRaw<T = unknown>(
   path: string,
   opt: RawOptions = {},
 ): Promise<T> {
+  // Check if we're in DEV mode and handle specific endpoints with mock data
+  const isDevMode = process.env.ENVIRONMENT === "DEV";
+  
+  // Return mock data for menu endpoint if in DEV mode
+  if (isDevMode && path.includes("resource_type=menu")) {
+    const mockMenuData: any = [
+      { id: "1", title: "Dashboard", resource: "dashboard", icon: "dashboard" },
+      { id: "2", title: "Contacts", resource: "contact", icon: "contacts" },
+      { id: "3", title: "Activities", resource: "task", icon: "activities" },
+      { id: "4", title: "Proposals", resource: "proposal", icon: "proposals" },
+      { id: "5", title: "Products", resource: "product", icon: "products" },
+    ];
+    return mockMenuData as unknown as T;
+  }
+  
   const logger = getLogger({ mod: "http", fn: "apiServerRaw" });
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), opt.timeoutMs ?? 10_000);
@@ -120,6 +135,19 @@ export async function apiServerRaw<T = unknown>(
 
     return payload as unknown as T;
   } catch (err: unknown) {
+    // If in DEV mode and this is a network error for the menu endpoint, return mock data
+    if (isDevMode && path.includes("resource_type=menu") && 
+        (err instanceof Error && err.message.includes("fetch"))) {
+      const mockMenuData: any = [
+        { id: "1", title: "Dashboard", resource: "dashboard", icon: "dashboard" },
+        { id: "2", title: "Contacts", resource: "contact", icon: "contacts" },
+        { id: "3", title: "Activities", resource: "task", icon: "activities" },
+        { id: "4", title: "Proposals", resource: "proposal", icon: "proposals" },
+        { id: "5", title: "Products", resource: "product", icon: "products" },
+      ];
+      return mockMenuData as unknown as T;
+    }
+    
     if (isApiError(err)) throw err;
 
     if (err instanceof Error && err.name === "AbortError") {

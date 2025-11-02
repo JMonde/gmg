@@ -133,6 +133,24 @@ export default function LeftMenu({ items }: { items: DynamicMenuItem[] }) {
       <div className="h-px bg-white/20 group-data-[collapsed=false]:w-full group-data-[collapsed=true]:w-11 group-data-[collapsed=true]:group-hover:w-full" />
       <ul>
         <li
+          data-active={isActiveItem("/page-wizard")}
+          className="text-brand-primary-100 data-[active=true]:text-brand-white h-11 shrink-0 rounded-md px-0.5 pt-1 text-sm group-data-[collapsed=false]:w-full group-data-[collapsed=true]:w-11 group-data-[collapsed=true]:group-hover:w-full hover:hover:bg-white/10 data-[active=true]:bg-white/10"
+        >
+          <Link
+            href="/page-wizard"
+            className="flex h-full w-full items-center justify-between"
+          >
+            <span className="left-menu__label overflow-hidden text-nowrap">
+              Page Wizard
+            </span>
+            {isActiveItem("/page-wizard") ? (
+              <EditFilledSettingsIcon className="size-5 group-data-[collapsed=true]:m-auto group-data-[collapsed=true]:group-hover:m-0" />
+            ) : (
+              <EditOutlinedSettingsIcon className="size-5 group-data-[collapsed=true]:m-auto group-data-[collapsed=true]:group-hover:m-0" />
+            )}
+          </Link>
+        </li>
+        <li
           data-active={isActiveItem("/menu-wizard")}
           className="text-brand-primary-100 data-[active=true]:text-brand-white h-11 shrink-0 rounded-md px-0.5 pt-1 text-sm group-data-[collapsed=false]:w-full group-data-[collapsed=true]:w-11 group-data-[collapsed=true]:group-hover:w-full hover:hover:bg-white/10 data-[active=true]:bg-white/10"
         >
