@@ -5,7 +5,11 @@ import { Open } from "./Open";
 import { StyleFilledTypeDefault } from "./StyleFilledTypeDefault";
 import { StyleOutlinedTypeLtr } from "./StyleOutlinedTypeLtr";
 
-export const Frame = () => {
+interface FrameProps {
+  className?: string;
+}
+
+export const Frame: React.FC<FrameProps> = ({ className = "" }) => {
   return (
     <div className="flex w-full max-w-full items-end justify-between relative flex-wrap gap-4 overflow-hidden">
       <div className="inline-flex items-end gap-2 relative flex-[0_0_auto] min-w-0">

@@ -1,0 +1,9 @@
+/* Control the visibility of the right sidebar in CRM layout */
+.no-right-sidebar .reports-help-section {
+  display: none;
+}
+
+/* Adjust the grid when right sidebar is hidden */
+.no-right-sidebar {
+  grid-template-columns: var(--left-menu-w) 1fr !important;
+}
