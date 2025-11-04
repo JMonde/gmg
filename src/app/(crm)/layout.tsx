@@ -5,17 +5,9 @@ import Reports from "./_components/reports";
 import TopBar from "./_components/top-bar";
 import { Suspense } from "react";
 
-export default function AppShell({ 
-  children, 
-  showDefaultSidebar = true,
-  customSidebar 
-}: { 
-  children: React.ReactNode;
-  showDefaultSidebar?: boolean;
-  customSidebar?: React.ReactNode;
-}) {
+export default function AppShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className={`app-shell bg-brand-gray-50 grid h-screen min-h-0 grid-cols-[var(--left-menu-w)_1fr${showDefaultSidebar ? '_25rem' : ''}] grid-rows-[auto_1fr] overflow-hidden transition-[grid-template-columns] duration-300 ease-in-out`}>
+    <div className="app-shell bg-brand-gray-50 grid h-screen min-h-0 grid-cols-[var(--left-menu-w)_1fr_25rem] grid-rows-[auto_1fr] overflow-hidden transition-[grid-template-columns] duration-300 ease-in-out">
       {/* Left Menu (spans both rows) */}
       <aside className="row-span-2 min-h-0">
         <Suspense fallback={<LeftMenuSkeleton />}>
@@ -33,17 +25,11 @@ export default function AppShell({
         {children}
       </main>
 
-      {/* Side Pane - Will be hidden if showDefaultSidebar is false, or replaced with custom sidebar */}
-      {showDefaultSidebar && (
-        <aside className="mt-6 mr-6 mb-9 space-y-4 reports-help-section">
-          {customSidebar ? customSidebar : (
-            <>
-              <Reports />
-              <HelpMaterials />
-            </>
-          )}
-        </aside>
-      )}
+      {/* Side Pane */}
+      <aside className="mt-6 mr-6 mb-9 space-y-4">
+        <Reports />
+        <HelpMaterials />
+      </aside>
     </div>
   );
 }
