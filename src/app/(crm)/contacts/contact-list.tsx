@@ -58,6 +58,12 @@ export default function ContactList({ filters, sort }: ContactListProps) {
 
   const contacts = (query.data?.pages ?? []).flat();
 
+  // Helper function to get a field value by name from additionalFields
+  const getContactFieldValue = (contact: Contact, fieldName: string): string => {
+    const field = contact.additionalFields.find(f => f.name === fieldName);
+    return field?.value?.toString() || '';
+  };
+
   // Client-side filtering and sorting
   let processedContacts = [...contacts];
 
@@ -70,16 +76,16 @@ export default function ContactList({ filters, sort }: ContactListProps) {
           contactValue = contact.name || '';
           break;
         case 'email':
-          contactValue = contact.email || '';
+          contactValue = getContactFieldValue(contact, 'email');
           break;
         case 'company':
-          contactValue = contact.company || '';
+          contactValue = getContactFieldValue(contact, 'company');
           break;
         case 'phone':
-          contactValue = contact.phone || '';
+          contactValue = getContactFieldValue(contact, 'phone');
           break;
         case 'status':
-          contactValue = contact.status || '';
+          contactValue = getContactFieldValue(contact, 'status');
           break;
         default:
           contactValue = '';
@@ -115,12 +121,12 @@ export default function ContactList({ filters, sort }: ContactListProps) {
           bVal = b.name || '';
           break;
         case 'email':
-          aVal = a.email || '';
-          bVal = b.email || '';
+          aVal = getContactFieldValue(a, 'email');
+          bVal = getContactFieldValue(b, 'email');
           break;
         case 'company':
-          aVal = a.company || '';
-          bVal = b.company || '';
+          aVal = getContactFieldValue(a, 'company');
+          bVal = getContactFieldValue(b, 'company');
           break;
         case 'createdAt':
           aVal = new Date(a.createdAt || '').getTime();
