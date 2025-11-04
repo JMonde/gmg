@@ -7,10 +7,6 @@ export type Contact = {
   additionalFields: Field[];
   createdAt: string;
   createdBy: string;
-  email?: string;
-  company?: string;
-  phone?: string;
-  status?: string;
 };
 
 export type ContactDetail = {
