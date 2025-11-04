@@ -6,8 +6,12 @@ import TopBar from "./_components/top-bar";
 import { Suspense } from "react";
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
+  // Check if this is the calendar page by checking for a specific class on the child
+  const isCalendarPage = typeof children === 'object' && children !== null && 
+    (children as any).props?.className?.includes('calendar-page');
+
   return (
-    <div className="app-shell bg-brand-gray-50 grid h-screen min-h-0 grid-cols-[var(--left-menu-w)_1fr_25rem] grid-rows-[auto_1fr] overflow-hidden transition-[grid-template-columns] duration-300 ease-in-out">
+    <div className={`app-shell bg-brand-gray-50 grid h-screen min-h-0 grid-cols-[var(--left-menu-w)_1fr${isCalendarPage ? '_0' : '_25rem'}] grid-rows-[auto_1fr] overflow-hidden transition-[grid-template-columns] duration-300 ease-in-out`}>
       {/* Left Menu (spans both rows) */}
       <aside className="row-span-2 min-h-0">
         <Suspense fallback={<LeftMenuSkeleton />}>
@@ -25,11 +29,13 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         {children}
       </main>
 
-      {/* Side Pane */}
-      <aside className="mt-6 mr-6 mb-9 space-y-4">
-        <Reports />
-        <HelpMaterials />
-      </aside>
+      {/* Side Pane - Only show if not calendar page */}
+      {!isCalendarPage && (
+        <aside className="mt-6 mr-6 mb-9 space-y-4">
+          <Reports />
+          <HelpMaterials />
+        </aside>
+      )}
     </div>
   );
 }

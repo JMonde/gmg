@@ -283,9 +283,9 @@ export const CalendarView: React.FC = () => {
                         {/* Events */}
                         <div className="w-32 left-[2px] top-[30px] absolute inline-flex flex-col justify-start items-start gap-0.5">
                           {dayEvents.slice(0, 3).map((event) => (
-                            <div key={event.id} className={`self-stretch h-6 ${getEventColor(event.type)} rounded inline-flex justify-start items-start overflow-hidden`}>
+                            <div key={event.id} className={`self-stretch h-7 ${getEventColor(event.type)} rounded inline-flex justify-start items-start overflow-hidden`}>
                               <div className={`w-1 self-stretch ${getEventBarColor(event.type)} shadow-[inset_0px_-2px_2px_0px_rgba(0,0,0,0.15)] shadow-[inset_0px_2px_2px_0px_rgba(255,255,255,0.15)]`} />
-                              <div className={`flex-1 self-stretch px-1 py-2 rounded-tr rounded-br border-r border-t border-b ${event.type === 'red' ? 'border-red-100' : event.type === 'blue' ? 'border-blue-100' : event.type === 'green' ? 'border-emerald-100' : 'border-orange-100'} inline-flex flex-col justify-between items-start`}>
+                              <div className={`flex-1 self-stretch px-2 py-1.5 rounded-tr rounded-br border-r border-t border-b ${event.type === 'red' ? 'border-red-100' : event.type === 'blue' ? 'border-blue-100' : event.type === 'green' ? 'border-emerald-100' : 'border-orange-100'} inline-flex flex-col justify-between items-start`}>
                                 <div className="w-28 justify-start text-zinc-700 text-xs font-normal leading-4 line-clamp-1">{event.title}</div>
                               </div>
                             </div>
