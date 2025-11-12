@@ -8,7 +8,7 @@ import { Suspense } from "react";
 export default function AppShell({ children }: { children: React.ReactNode }) {
   // Check if this is the calendar page by checking for a specific class on the child
   const isCalendarPage = typeof children === 'object' && children !== null && 
-    (children as any).props?.className?.includes('calendar-page');
+    (children as { props?: { className?: string } }).props?.className?.includes('calendar-page');
 
   return (
     <div className={`app-shell bg-brand-gray-50 grid h-screen min-h-0 grid-cols-[var(--left-menu-w)_1fr${isCalendarPage ? '_0' : '_25rem'}] grid-rows-[auto_1fr] overflow-hidden transition-[grid-template-columns] duration-300 ease-in-out`}>

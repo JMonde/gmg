@@ -1,9 +1,12 @@
 import "server-only";
-import { cache } from "react";
 import { AuthUser } from "@/core/contracts/auth";
 import { getRefreshCookie } from "@/infra/auth/cookies-server";
 import { getLogger } from "@/infra/logging/server";
 import { redirectToLogin } from "../lib/redirect";
+
+// Simple in-memory cache for server components
+let cachedUser: AuthUser | null = null;
+let cacheExpiry: number | null = null;
 
 // TODO: either add JWT validation or use BFF session without exposing RT or RT to the client
 function parseUserFromRefreshToken(refreshToken: string): AuthUser {
@@ -23,29 +26,47 @@ function parseUserFromRefreshToken(refreshToken: string): AuthUser {
   }
 }
 
-export const getAuthUser = cache(async (): Promise<AuthUser> => {
+export const getAuthUser = async (): Promise<AuthUser> => {
+  // Check if we have a cached user and it's still valid (let's say for 1 minute)
+  const now = Date.now();
+  if (cachedUser && cacheExpiry && now < cacheExpiry) {
+    return cachedUser;
+  }
+
   const logger = getLogger({ mod: "auth", fn: "getAuthUser" });
   const refreshToken = await getRefreshCookie();
   if (!refreshToken) {
     logger.warn("unauthenticated: missing refresh token");
     if(process.env.ENVIRONMENT === "DEV") {
-      return {
+      const devUser = {
         id: "1",
         orgId: "1",
       };
+      // Cache the dev user for 1 minute
+      cachedUser = devUser;
+      cacheExpiry = now + 60000; // 1 minute in milliseconds
+      return devUser;
     }
     return redirectToLogin();
   }
   try {
-    return parseUserFromRefreshToken(refreshToken!);
+    const user = parseUserFromRefreshToken(refreshToken!);
+    // Cache the user for 1 minute
+    cachedUser = user;
+    cacheExpiry = now + 60000; // 1 minute in milliseconds
+    return user;
   } catch (err) {
     logger.warn({ err }, "unauthenticated: invalid refresh token");
     if(process.env.ENVIRONMENT === "DEV") {
-      return {
+      const devUser = {
         id: "1",
         orgId: "1",
       };
+      // Cache the dev user for 1 minute
+      cachedUser = devUser;
+      cacheExpiry = now + 60000; // 1 minute in milliseconds
+      return devUser;
     }
     return redirectToLogin();
   }
-});
+};

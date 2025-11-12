@@ -124,7 +124,7 @@ export async function apiServerRaw<T = unknown>(
     const isDevMode = process.env.NODE_ENV === "development";
     if (isDevMode && path.includes("resource_type=menu") && 
         (err instanceof Error && err.message.includes("fetch"))) {
-      const mockMenuData: any = [
+      const mockMenuData = [
         { id: "1", title: "Dashboard", resource: "dashboard", icon: "dashboard" },
         { id: "2", title: "Contacts", resource: "contact", icon: "contacts" },
         { id: "3", title: "Activities", resource: "task", icon: "activities" },
