@@ -1,7 +1,8 @@
 import { Control, Controller, FieldValues } from "react-hook-form";
 import { EditField } from "@/features/shared/models/crud-models";
-import { ReactComponent as RadioFilledIcon } from "@/icons/radio-filled-button-icon.svg";
-import { ReactComponent as RadioOutlinedIcon } from "@/icons/radio-outlined-button-icon.svg";
+import RadioFilledIcon from "@/assets/icons/radio-filled-button-icon.svg";
+import RadioOutlinedIcon from "@/assets/icons/radio-outlined-button-icon.svg";
+import Image from "next/image";
 
 interface RadioInputProps {
   field: EditField;
@@ -40,9 +41,9 @@ export function RadioInput({ field, control }: RadioInputProps) {
                     className="sr-only"
                   />
                   {isChecked ? (
-                    <RadioFilledIcon className="text-brand-primary-500 h-4 w-4" />
+                    <Image src={RadioFilledIcon} width={16} height={16} alt="" className="text-brand-primary-500 h-4 w-4" />
                   ) : (
-                    <RadioOutlinedIcon className="text-brand-gray-400 h-4 w-4" />
+                    <Image src={RadioOutlinedIcon} width={16} height={16} alt="" className="text-brand-gray-400 h-4 w-4" />
                   )}
                   <span>{opt.value}</span>
                 </label>

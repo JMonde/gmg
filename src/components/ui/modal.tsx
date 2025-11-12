@@ -2,7 +2,8 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import { createPortal } from "react-dom";
-import { ReactComponent as CloseIcon } from "@/icons/dismiss-outlined-default-icon.svg";
+import CloseIcon from "@/assets/icons/dismiss-outlined-default-icon.svg";
+import Image from "next/image";
 
 type ModalProps = {
   isOpen: boolean;
@@ -83,7 +84,7 @@ export function Modal({
           onClick={onClose}
           className="absolute top-5 right-4 cursor-pointer leading-none text-[#61646C]"
         >
-          <CloseIcon className="size-5" />
+          <Image src={CloseIcon} width={20} height={20} alt="" className="size-5" />
         </button>
         <div>{children}</div>
       </div>

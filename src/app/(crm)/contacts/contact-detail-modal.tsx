@@ -11,11 +11,12 @@ import {
 } from "@/features/shared/models/contact-crud-models";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Search } from "lucide-react";
-import { ReactComponent as EditIcon } from "@/icons/edit-outlined-default-icon.svg";
-import { ReactComponent as CopyIcon } from "@/icons/copy-outlined-default-icon.svg";
-import { ReactComponent as AddActivityIcon } from "@/icons/add-outlined-square-icon.svg";
-import { ReactComponent as HistoryIcon } from "@/icons/history-outlined-default-icon.svg";
-import { ReactComponent as EllipseIcon } from "@/icons/ellipse-filled-default-icon.svg";
+import EditIcon from "@/assets/icons/edit-outlined-default-icon.svg";
+import CopyIcon from "@/assets/icons/copy-outlined-default-icon.svg";
+import AddActivityIcon from "@/assets/icons/add-outlined-square-icon.svg";
+import HistoryIcon from "@/assets/icons/history-outlined-default-icon.svg";
+import EllipseIcon from "@/assets/icons/ellipse-filled-default-icon.svg";
+import Image from "next/image";
 import { distributeGroupsToColumns } from "@/features/shared/lib/distribute-groups-to-columns";
 
 export function ContactDetailModal() {
@@ -116,7 +117,11 @@ export function ContactDetailModal() {
                 <span className="text-brand-gray-400 text-xs">
                   ID:{detailQuery.data?.id ?? ""}
                 </span>
-                <EllipseIcon
+                <Image 
+                  src={EllipseIcon}
+                  width={6}
+                  height={6}
+                  alt=""
                   className="text-brand-gray-400 size-1.5"
                   aria-hidden
                 />
@@ -213,15 +218,13 @@ export function ContactDetailModal() {
   );
 }
 
-type IconComponent = React.FC<React.SVGProps<SVGSVGElement>>;
-
 function ActionButton({
   label,
   Icon,
   onClick,
 }: {
   label: string;
-  Icon?: IconComponent;
+  Icon?: string; // URL of SVG
   onClick?: () => void;
 }) {
   return (
@@ -230,7 +233,7 @@ function ActionButton({
       className="border-brand-gray-200 hover:border-brand-primary-400 inline-flex cursor-pointer items-center gap-2 rounded-sm border-1 px-2 py-1.5"
     >
       {Icon ? (
-        <Icon className="text-brand-primary-500 size-4" aria-hidden />
+        <Image src={Icon} width={16} height={16} alt="" className="text-brand-primary-500 size-4" aria-hidden />
       ) : null}
       <span className="text-brand-gray-600 text-sm font-medium">{label}</span>
     </button>
