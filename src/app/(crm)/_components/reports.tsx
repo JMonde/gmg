@@ -1,5 +1,5 @@
-import { ReactComponent as TasksAppOutlinedIcon } from "@/icons/tasks-app-outlined-icon.svg";
-import { ReactComponent as ChevronOutlinedUpIcon } from "@/icons/chevron-outlined-up-icon.svg";
+import TasksAppOutlinedIcon from "@/icons/tasks-app-outlined-icon.svg";
+import ChevronOutlinedUpIcon from "@/icons/chevron-outlined-up-icon.svg";
 
 type ReportItem = {
   id: string;
@@ -12,25 +12,25 @@ const reports: ReportItem[] = [
   {
     id: "individuals",
     label: "Individuals",
-    Icon: TasksAppOutlinedIcon,
+    Icon: () => <TasksAppOutlinedIcon />,
     records: 82,
   },
   {
     id: "companies",
     label: "Companies",
-    Icon: TasksAppOutlinedIcon,
+    Icon: () => <TasksAppOutlinedIcon />,
     records: 100,
   },
   {
     id: "prospects",
     label: "Prospect List",
-    Icon: TasksAppOutlinedIcon,
+    Icon: () => <TasksAppOutlinedIcon />,
     records: 100,
   },
   {
     id: "leads",
     label: "Lead List",
-    Icon: TasksAppOutlinedIcon,
+    Icon: () => <TasksAppOutlinedIcon />,
     records: 100,
   },
 ];
@@ -53,7 +53,7 @@ export default function Reports() {
             className="hover:bg-brand-gray-100 flex cursor-pointer items-start justify-between rounded px-1 py-2"
           >
             <div className="flex items-center gap-2">
-              <item.Icon className="text-brand-primary-600 size-4" />
+              <item.Icon />
               <div className="flex flex-col">
                 <span className="text-brand-gray-600 text-sm font-normal">
                   {item.label}
@@ -63,7 +63,7 @@ export default function Reports() {
                 </span>
               </div>
             </div>
-            <ChevronOutlinedUpIcon className="text-brand-gray-300 size-4 rotate-90 self-center" />
+            <ChevronOutlinedUpIcon />
           </div>
         ))}
       </div>

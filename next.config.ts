@@ -1,30 +1,24 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   reactStrictMode: true,
   webpack: (config) => {
-    // Find the file loader rule that handles images/asset files
-    const assetRule = config.module.rules.find((rule: any) =>
-      rule.test && typeof rule.test.test === 'function' && 
-      rule.test.test('.svg')
+    // Exclude SVGs from the default asset loader
+    const assetRule = config.module.rules.find((rule: any) => 
+      rule.test && rule.test.toString().includes('svg')
     );
-
+    
     if (assetRule) {
-      // Exclude SVG files from the default asset rule
-      assetRule.exclude = /\.svg$/i;
+      assetRule.exclude = /\.svg$/;
     }
 
-    // Add the SVGR rule for SVG files with correct configuration
+    // Add SVGR loader for SVGs
     config.module.rules.push({
-      test: /\.svg$/i,
+      test: /\.svg$/,
       use: [
         {
           loader: '@svgr/webpack',
           options: {
-            typescript: true,
-            dimensions: false,
-            svgo: true,
             svgoConfig: {
               plugins: [
                 {

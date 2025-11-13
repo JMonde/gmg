@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ReactComponent as ChevronOutlinedUpIcon } from "@/icons/chevron-outlined-up-icon.svg";
-import { ReactComponent as ToggleOutlinedMultipleIcon } from "@/icons/toggle-outlined-multiple-icon.svg";
-import { ReactComponent as SignOutOutlinedIcon } from "@/icons/sign-out-outlined-icon.svg";
-import { ReactComponent as PeopleOutlinedDefaultIcon } from "@/icons/people-outlined-default-icon.svg";
+import ChevronOutlinedUpIcon from "@/icons/chevron-outlined-up-icon.svg";
+import ToggleOutlinedMultipleIcon from "@/icons/toggle-outlined-multiple-icon.svg";
+import SignOutOutlinedIcon from "@/icons/sign-out-outlined-icon.svg";
+import PeopleOutlinedDefaultIcon from "@/icons/people-outlined-default-icon.svg";
 import { logoutAction } from "@/features/auth/actions";
 
 import { StaticMenuItem } from "@/core/contracts/navigation";

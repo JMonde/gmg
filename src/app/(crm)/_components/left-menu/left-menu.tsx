@@ -1,17 +1,17 @@
 "use client";
 
-import { ReactComponent as ArrowMinimizeOutlinedVerticalIcon } from "@/icons/arrow-minimize-outlined-vertical-icon.svg";
-import { ReactComponent as ArrowMaximizeOutlinedVerticalIcon } from "@/icons/arrow-maximize-outlined-vertical-icon.svg";
-import { ReactComponent as ContactCardFilledDefaultIcon } from "@/icons/contact-card-filled-default-icon.svg";
-import { ReactComponent as TaskListOutlinedLtrIcon } from "@/icons/task-list-outlined-ltr-icon.svg";
-import { ReactComponent as ChatOutlinedDefaultIcon } from "@/icons/chat-outlined-default-icon.svg";
-import { ReactComponent as GridOutlinedDefaultIcon } from "@/icons/grid-outlined-default-icon.svg";
-import { ReactComponent as EditOutlinedSettingsIcon } from "@/icons/edit-outlined-settings-icon.svg";
-import { ReactComponent as EditFilledSettingsIcon } from "@/icons/edit-filled-settings-icon.svg";
-import { ReactComponent as ContactCardOutlinedDefaultIcon } from "@/icons/contact-card-outlined-default-icon.svg";
-import { ReactComponent as TaskListFilledLtrIcon } from "@/icons/task-list-filled-ltr-icon.svg";
-import { ReactComponent as ChatFilledDefaultIcon } from "@/icons/chat-filled-default-icon.svg";
-import { ReactComponent as GridFilledDefaultIcon } from "@/icons/grid-filled-default-icon.svg";
+import ArrowMinimizeOutlinedVerticalIcon from "@/icons/arrow-minimize-outlined-vertical-icon.svg";
+import ArrowMaximizeOutlinedVerticalIcon from "@/icons/arrow-maximize-outlined-vertical-icon.svg";
+import ContactCardFilledDefaultIcon from "@/icons/contact-card-filled-default-icon.svg";
+import TaskListOutlinedLtrIcon from "@/icons/task-list-outlined-ltr-icon.svg";
+import ChatOutlinedDefaultIcon from "@/icons/chat-outlined-default-icon.svg";
+import GridOutlinedDefaultIcon from "@/icons/grid-outlined-default-icon.svg";
+import EditOutlinedSettingsIcon from "@/icons/edit-outlined-settings-icon.svg";
+import EditFilledSettingsIcon from "@/icons/edit-filled-settings-icon.svg";
+import ContactCardOutlinedDefaultIcon from "@/icons/contact-card-outlined-default-icon.svg";
+import TaskListFilledLtrIcon from "@/icons/task-list-filled-ltr-icon.svg";
+import ChatFilledDefaultIcon from "@/icons/chat-filled-default-icon.svg";
+import GridFilledDefaultIcon from "@/icons/grid-filled-default-icon.svg";
 import Image from "next/image";
 import React from "react";
 import { DynamicMenuItem } from "@/core/contracts/navigation";
@@ -30,12 +30,18 @@ const iconMap: Record<
     Outlined: ContactCardOutlinedDefaultIcon,
     Filled: ContactCardFilledDefaultIcon,
   },
-  task: { Outlined: TaskListOutlinedLtrIcon, Filled: TaskListFilledLtrIcon },
+  task: { 
+    Outlined: TaskListOutlinedLtrIcon, 
+    Filled: TaskListFilledLtrIcon 
+  },
   proposal: {
     Outlined: ChatOutlinedDefaultIcon,
     Filled: ChatFilledDefaultIcon,
   },
-  product: { Outlined: GridOutlinedDefaultIcon, Filled: GridFilledDefaultIcon },
+  product: { 
+    Outlined: GridOutlinedDefaultIcon, 
+    Filled: GridFilledDefaultIcon 
+  },
 };
 
 export default function LeftMenu({ items }: { items: DynamicMenuItem[] }) {
@@ -92,7 +98,6 @@ export default function LeftMenu({ items }: { items: DynamicMenuItem[] }) {
           <div>
             <ToggleMenuIcon
               aria-hidden
-              className="size-5 rotate-90 cursor-pointer text-white"
             />
           </div>
         </button>
@@ -103,8 +108,8 @@ export default function LeftMenu({ items }: { items: DynamicMenuItem[] }) {
             const isActive = isActiveItem(item.href);
             const iconPair = iconMap[item.resource] ??
               iconMap[item.icon] ?? {
-                Outlined: GridOutlinedDefaultIcon,
-                Filled: GridFilledDefaultIcon,
+                Outlined: () => <GridOutlinedDefaultIcon />,
+                Filled: () => <GridFilledDefaultIcon />,
               };
             const IconComponent = isActive
               ? iconPair.Filled
@@ -120,7 +125,7 @@ export default function LeftMenu({ items }: { items: DynamicMenuItem[] }) {
                   href={item.href}
                   className="inline-flex h-full w-full items-center justify-start gap-3"
                 >
-                  <IconComponent className="size-5 shrink-0" />
+                  <IconComponent />
                   <span className="left-menu__label overflow-hidden text-nowrap">
                     {item.label}
                   </span>
@@ -144,9 +149,9 @@ export default function LeftMenu({ items }: { items: DynamicMenuItem[] }) {
               Page Wizard
             </span>
             {isActiveItem("/page-wizard") ? (
-              <EditFilledSettingsIcon className="size-5 group-data-[collapsed=true]:m-auto group-data-[collapsed=true]:group-hover:m-0" />
+              <EditFilledSettingsIcon />
             ) : (
-              <EditOutlinedSettingsIcon className="size-5 group-data-[collapsed=true]:m-auto group-data-[collapsed=true]:group-hover:m-0" />
+              <EditOutlinedSettingsIcon />
             )}
           </Link>
         </li>
@@ -162,9 +167,9 @@ export default function LeftMenu({ items }: { items: DynamicMenuItem[] }) {
               Menu Wizard
             </span>
             {isActiveItem("/menu-wizard") ? (
-              <EditFilledSettingsIcon className="size-5 group-data-[collapsed=true]:m-auto group-data-[collapsed=true]:group-hover:m-0" />
+              <EditFilledSettingsIcon />
             ) : (
-              <EditOutlinedSettingsIcon className="size-5 group-data-[collapsed=true]:m-auto group-data-[collapsed=true]:group-hover:m-0" />
+              <EditOutlinedSettingsIcon />
             )}
           </Link>
         </li>

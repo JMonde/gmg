@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Search } from "lucide-react";
-import { ReactComponent as CalendarFilledLtrIcon } from "@/icons/calendar-filled-ltr-icon.svg";
-import { ReactComponent as QuestionOutlinedCircleIcon } from "@/icons/question-outlined-circle-icon.svg";
+import CalendarFilledLtrIcon from "@/icons/calendar-filled-ltr-icon.svg";
+import QuestionOutlinedCircleIcon from "@/icons/question-outlined-circle-icon.svg";
 
 import AccountMenu from "./account-menu";
 
@@ -20,7 +20,6 @@ export default function TopBar() {
       <div className="flex items-center justify-start gap-4">
         <Link href="/calendar" className="inline-flex items-center gap-2 hover:bg-gray-50 px-2 py-1 rounded-md transition-colors">
           <CalendarFilledLtrIcon
-            className="text-brand-gray-500 size-4"
             aria-hidden
           />
           <span className="text-brand-gray-600 text-sm font-medium">
@@ -32,7 +31,6 @@ export default function TopBar() {
         </div>
         <div>
           <QuestionOutlinedCircleIcon
-            className="text-brand-gray-500 size-4"
             aria-hidden
           />
         </div>

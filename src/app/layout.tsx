@@ -1,17 +1,17 @@
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
-import "./globals.css";
-import { ReactQueryProvider } from "@/components/providers";
+'use client';
 
+import React from 'react';
+
+// Root layout with client directive to ensure all rendering happens client-side
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
-      <body className={GeistSans.className}>
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+    <html lang="en">
+      <body>
+        {children}
       </body>
     </html>
   );

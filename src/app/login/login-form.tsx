@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, type LoginInput } from "@/features/auth/schema";
 import { loginAction } from "@/features/auth/actions";
-import { ReactComponent as ProgressArc } from "@/icons/progress-arc-default.svg";
+import ProgressArc from "@/icons/progress-arc-default.svg";
 import { useTransition } from "react";
 
 export default function LoginForm({ next }: { next: string | undefined }) {
