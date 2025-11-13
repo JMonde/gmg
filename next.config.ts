@@ -4,8 +4,27 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactStrictMode: true,
   webpack: (config) => {
-    // Create a new SVG rule
-    const svgRule = {
+    // Remove any existing asset rules that might handle SVGs
+    config.module.rules = config.module.rules.filter((rule: any) => {
+      if (rule && rule.test) {
+        if (rule.test instanceof RegExp) {
+          // If the rule's test regex includes SVG, exclude the rule
+          return !rule.test.test('.svg');
+        } else if (typeof rule.test === 'function') {
+          try {
+            // If the rule's test function accepts SVG, exclude the rule
+            return !rule.test('.svg');
+          } catch (e) {
+            // If test function throws, keep the rule
+            return true;
+          }
+        }
+      }
+      return true;
+    });
+
+    // Add our SVGR rule for SVG files with proper configuration
+    config.module.rules.push({
       test: /\.svg$/i,
       use: [
         {
@@ -29,20 +48,7 @@ const nextConfig: NextConfig = {
           },
         },
       ],
-    };
-
-    // Find the asset rule (usually handles images, fonts, etc.) and modify it to exclude SVGs
-    const assetRuleIndex = config.module.rules.findIndex((rule: any) => {
-      return rule && rule.test && rule.test.toString().includes('svg');
     });
-
-    if (assetRuleIndex !== -1) {
-      // If there's already an SVG rule, replace it
-      config.module.rules[assetRuleIndex] = svgRule;
-    } else {
-      // Otherwise, add our rule to handle SVGs
-      config.module.rules.push(svgRule);
-    }
 
     return config;
   },
