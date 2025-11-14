@@ -1,44 +1,41 @@
 import { StaticMenuItem } from "@/core/contracts/navigation";
-// import { ReactComponent as QuestionOutlinedCircleIcon } from "@/icons/question-outlined-circle-icon.svg";
-
-// Placeholder icon component
-const PlaceholderIcon = ({ className, ...props }: { className?: string; [key: string]: any }) => <div className={className} {...props}>[Icon]</div>;
+import { LifeBuoy, ShieldCheck, CreditCard, HelpCircle, GraduationCap } from 'lucide-react';
 
 const helpMenu: StaticMenuItem[] = [
   {
     id: "support",
     label: "Support",
     href: "/support",
-    IconOutlined: PlaceholderIcon,
-    IconFilled: PlaceholderIcon,
+    IconOutlined: LifeBuoy,
+    IconFilled: LifeBuoy,
   },
   {
     id: "security",
     label: "Security & Terms of Service",
     href: "/security",
-    IconOutlined: PlaceholderIcon,
-    IconFilled: PlaceholderIcon,
+    IconOutlined: ShieldCheck,
+    IconFilled: ShieldCheck,
   },
   {
     id: "pricing",
     label: "Pricing & Features",
     href: "/pricing",
-    IconOutlined: PlaceholderIcon,
-    IconFilled: PlaceholderIcon,
+    IconOutlined: CreditCard,
+    IconFilled: CreditCard,
   },
   {
     id: "faq",
     label: "FAQ",
     href: "/faq",
-    IconOutlined: PlaceholderIcon,
-    IconFilled: PlaceholderIcon,
+    IconOutlined: HelpCircle,
+    IconFilled: HelpCircle,
   },
   {
     id: "tutorial",
     label: "Tutorial",
     href: "/tutorial",
-    IconOutlined: PlaceholderIcon,
-    IconFilled: PlaceholderIcon,
+    IconOutlined: GraduationCap,
+    IconFilled: GraduationCap,
   },
 ];
 

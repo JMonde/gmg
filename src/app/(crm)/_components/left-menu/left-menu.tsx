@@ -1,49 +1,47 @@
 "use client";
 
-// import { ReactComponent as ArrowMinimizeOutlinedVerticalIcon } from "@/icons/arrow-minimize-outlined-vertical-icon.svg";
-// import { ReactComponent as ArrowMaximizeOutlinedVerticalIcon } from "@/icons/arrow-maximize-outlined-vertical-icon.svg";
-// import { ReactComponent as ContactCardFilledDefaultIcon } from "@/icons/contact-card-filled-default-icon.svg";
-// import { ReactComponent as TaskListOutlinedLtrIcon } from "@/icons/task-list-outlined-ltr-icon.svg";
-// import { ReactComponent as ChatOutlinedDefaultIcon } from "@/icons/chat-outlined-default-icon.svg";
-// import { ReactComponent as GridOutlinedDefaultIcon } from "@/icons/grid-outlined-default-icon.svg";
-// import { ReactComponent as EditOutlinedSettingsIcon } from "@/icons/edit-outlined-settings-icon.svg";
-// import { ReactComponent as EditFilledSettingsIcon } from "@/icons/edit-filled-settings-icon.svg";
-// import { ReactComponent as ContactCardOutlinedDefaultIcon } from "@/icons/contact-card-outlined-default-icon.svg";
-// import { ReactComponent as TaskListFilledLtrIcon } from "@/icons/task-list-filled-ltr-icon.svg";
-// import { ReactComponent as ChatFilledDefaultIcon } from "@/icons/chat-filled-default-icon.svg";
-// import { ReactComponent as GridFilledDefaultIcon } from "@/icons/grid-filled-default-icon.svg";
 import Image from "next/image";
 import React from "react";
 import { DynamicMenuItem } from "@/core/contracts/navigation";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useUIStore } from "@/stores/ui";
-
-// Placeholder icon component
-const PlaceholderIcon = ({ className, ...props }: { className?: string; [key: string]: any }) => <div className={className} {...props}>[Icon]</div>;
+import {
+  User,
+  UserRound,
+  Clipboard,
+  ClipboardList,
+  FileText,
+  FileTextIcon,
+  Settings,
+  Settings2,
+  Menu,
+  X,
+  RotateCcw
+} from 'lucide-react';
 
 const iconMap: Record<
   string,
   {
-    Outlined: React.FC<React.SVGProps<SVGSVGElement>>;
-    Filled: React.FC<React.SVGProps<SVGSVGElement>>;
+    Outlined: React.FC<{ className?: string }>;
+    Filled: React.FC<{ className?: string }>;
   }
 > = {
   contact: {
-    Outlined: PlaceholderIcon,
-    Filled: PlaceholderIcon,
+    Outlined: User,
+    Filled: UserRound,
   },
-  task: { 
-    Outlined: PlaceholderIcon, 
-    Filled: PlaceholderIcon 
+  task: {
+    Outlined: Clipboard,
+    Filled: ClipboardList,
   },
   proposal: {
-    Outlined: PlaceholderIcon,
-    Filled: PlaceholderIcon,
+    Outlined: FileText,
+    Filled: FileTextIcon,
   },
-  product: { 
-    Outlined: PlaceholderIcon, 
-    Filled: PlaceholderIcon 
+  product: {
+    Outlined: Settings,
+    Filled: Settings2,
   },
 };
 
@@ -52,7 +50,7 @@ export default function LeftMenu({ items }: { items: DynamicMenuItem[] }) {
   const isMenuCollapsed = useUIStore((s) => s.menuState.isMenuCollapsed);
   const toggleMenu = useUIStore((s) => s.menuState.toggleMenu);
 
-  const ToggleMenuIcon = PlaceholderIcon;
+  const ToggleMenuIcon = isMenuCollapsed ? Menu : X;
 
   const isActiveItem = (itemHref: string) => {
     return pathname.startsWith(itemHref);
@@ -110,8 +108,8 @@ export default function LeftMenu({ items }: { items: DynamicMenuItem[] }) {
             const isActive = isActiveItem(item.href);
             const iconPair = iconMap[item.resource] ??
               iconMap[item.icon] ?? {
-                Outlined: PlaceholderIcon,
-                Filled: PlaceholderIcon,
+                Outlined: RotateCcw,
+                Filled: RotateCcw,
               };
             const IconComponent = isActive
               ? iconPair.Filled
@@ -150,7 +148,7 @@ export default function LeftMenu({ items }: { items: DynamicMenuItem[] }) {
             <span className="left-menu__label overflow-hidden text-nowrap">
               Page Wizard
             </span>
-            <PlaceholderIcon className="size-5 group-data-[collapsed=true]:m-auto group-data-[collapsed=true]:group-hover:m-0" />
+            <RotateCcw className="size-5 group-data-[collapsed=true]:m-auto group-data-[collapsed=true]:group-hover:m-0" />
           </Link>
         </li>
         <li
@@ -164,7 +162,7 @@ export default function LeftMenu({ items }: { items: DynamicMenuItem[] }) {
             <span className="left-menu__label overflow-hidden text-nowrap">
               Menu Wizard
             </span>
-            <PlaceholderIcon className="size-5 group-data-[collapsed=true]:m-auto group-data-[collapsed=true]:group-hover:m-0" />
+            <RotateCcw className="size-5 group-data-[collapsed=true]:m-auto group-data-[collapsed=true]:group-hover:m-0" />
           </Link>
         </li>
       </ul>

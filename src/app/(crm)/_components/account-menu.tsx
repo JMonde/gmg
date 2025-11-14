@@ -1,41 +1,35 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-// import { ReactComponent as ChevronOutlinedUpIcon } from "@/icons/chevron-outlined-up-icon.svg";
-// import { ReactComponent as ToggleOutlinedMultipleIcon } from "@/icons/toggle-outlined-multiple-icon.svg";
-// import { ReactComponent as SignOutOutlinedIcon } from "@/icons/sign-out-outlined-icon.svg";
-// import { ReactComponent as PeopleOutlinedDefaultIcon } from "@/icons/people-outlined-default-icon.svg";
 import { logoutAction } from "@/features/auth/actions";
+import { ChevronDown, Users, ShieldAlert, LogOut } from 'lucide-react';
 
 import { StaticMenuItem } from "@/core/contracts/navigation";
 
 type UserInfo = { name: string; email: string; avatar?: string };
 const userInfo: UserInfo = { name: "John Doe", email: "john.doe@example.com" };
 
-// Using a placeholder component instead of SVG icons
-const PlaceholderIcon = ({ className, ...props }: { className?: string; [key: string]: any }) => <div className={className} {...props}>[Icon]</div>;
-
 const menuItems: StaticMenuItem[] = [
   {
     id: "permission-management",
     label: "User and Permission Management",
     href: "/permission-management",
-    IconOutlined: PlaceholderIcon,
-    IconFilled: PlaceholderIcon,
+    IconOutlined: Users,
+    IconFilled: Users,
   },
   {
     id: "user-restriction",
     label: "User Restriction",
     href: "/user-restriction",
-    IconOutlined: PlaceholderIcon,
-    IconFilled: PlaceholderIcon,
+    IconOutlined: ShieldAlert,
+    IconFilled: ShieldAlert,
   },
   {
     id: "log-out",
     label: "Log Out",
     href: "/log-out",
-    IconOutlined: PlaceholderIcon,
-    IconFilled: PlaceholderIcon,
+    IconOutlined: LogOut,
+    IconFilled: LogOut,
   },
 ];
 
@@ -130,7 +124,7 @@ export default function AccountMenu() {
           </span>
         </span>
 
-        <PlaceholderIcon
+        <ChevronDown
           className="text-brand-gray-400 group-aria-[expanded=true]:text-brand-primary-500 ml-2 size-4 transition-transform duration-200 ease-out group-aria-[expanded=false]:rotate-180"
           aria-hidden
         />
